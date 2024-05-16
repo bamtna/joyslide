@@ -4,7 +4,7 @@ This project demonstrates how to create a touch-sensitive steering wheel using t
 
 ## Hardware Requirements
 
-- Arduino-compatible microcontroller
+- Arduino-compatible microcontroller based on ATmega32u4 [(See list of supported boards for Joystick library here)](https://github.com/MHeironimus/ArduinoJoystickLibrary/wiki/Supported-Boards)
 - Trill Bar sensor
 - USB cable for programming and power
 
