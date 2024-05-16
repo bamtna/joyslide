@@ -53,6 +53,7 @@ For a neat setup, you can 3D print a housing for the Trill Bar using this [Trill
 
 When setting up the SparkFun Qwiic Pro Micro in the Arduino IDE, follow these steps carefully to avoid common pitfalls:
 
+- **Board Add-Ons**: Install the Spark Fun board add-ons to Arduino IDE by following the instructions [here](https://learn.sparkfun.com/tutorials/installing-arduino-ide/board-add-ons-with-arduino-board-manager).
 - **Board Selection**: In the Arduino IDE, go to `Tools` > `Board` and select `SparkFun Pro Micro`.
 - **Processor Selection**: Go to `Tools` > `Processor` and select `ATmega32U4 (5V, 16 MHz)`.
 
