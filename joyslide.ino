@@ -21,7 +21,7 @@ Joystick_ Joystick(
 );
 
 const int sliderMax = 3200;
-const float thresholdPercentage = 0.1;  // % of 'deadzone' at either end to be used for 100% steering
+const float thresholdPercentage = 0.15;  // % of 'deadzone' at either end to be used for 100% steering
 const int threshold = sliderMax * thresholdPercentage;
 
 const float deadzonePercentage = 0.02;  // % of slider in the middle to be a deadzone
@@ -53,6 +53,8 @@ void setup() {
 
   // have the sensor automatically scan input as quickly as possible
   trillSensor.setAutoScanInterval(1);
+
+  trillSensor.setNoiseThreshold(200);
 
   Joystick.begin();
   
@@ -141,7 +143,7 @@ void loop() {
     }
   }
 
-  Joystick.setSteering(steeringValue);
+  Joystick.setSteering(sliderMax - steeringValue);
 
   // 250 Hz
   delay(4);
