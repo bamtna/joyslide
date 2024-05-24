@@ -1,67 +1,53 @@
-# Joyslide
+# ??
+-------
+This is a MicroPython port of [bamtna's joyslide project](https://github.com/bamtna/joyslide/tree/main) which utilizes a Trill Bar as a touch-sensitive input device that is mapped to the steering axis of a joystick.
 
-This project demonstrates how to create a touch-sensitive steering wheel using the Trill Bar sensor and the Arduino Joystick library. The steering input is read from the Trill sensor and mapped to the steering axis of a virtual joystick, allowing you to control steering in a game or application by touching different positions on the Trill Bar.
-
-## Hardware Requirements
-
-- Arduino-compatible microcontroller based on ATmega32u4 [(See list of supported boards for Joystick library here)](https://github.com/MHeironimus/ArduinoJoystickLibrary/wiki/Supported-Boards)
+# Hardware:
+-------
+- Microcontroller capable of running a machine.USBDevice compatible port of MicroPython (I used a Pi Pico w/rp2040 board)
 - Trill Bar sensor
-- USB cable for programming and power
+- USB Cable
 
-## Software Requirements
+# Software:
+-------
+- [MicroPython usb-device-hid hid.py library](https://github.com/micropython/micropython-lib/tree/master/micropython/usb/usb-device-hid/usb/device)
+- [MicroPython usb-device core.py library](https://github.com/micropython/micropython-lib/tree/master/micropython/usb/usb-device/usb/device)
+- [MicroPythonTrill trill.py and touch.py libraries](https://github.com/Heerkog/MicroPythonTrill)
+- [mpremote](https://pypi.org/project/mpremote/) (pip install mpremote)
 
-- [Arduino IDE](https://www.arduino.cc/en/software)
-- [Arduino Joystick Library](https://github.com/MHeironimus/ArduinoJoystickLibrary)
-- [Trill Arduino Library](https://github.com/BelaPlatform/Trill-Arduino)
+# Case:
 
-## Installation
+[Case with several configurations](https://www.thingiverse.com/thing:6630614) is available on Thingiverse.  Several trim pieces to aid in tactile feedback and a bottom for the case with recessed holes for anti slip rubber nubs are available too.
 
-### Arduino Joystick Library
+[Bela's Trill Bar case](https://www.thingiverse.com/thing:5320767) is what I based my designs off of.
 
-1. Download the latest version of the Joystick library from [this link](https://github.com/MHeironimus/ArduinoJoystickLibrary/archive/master.zip).
-2. Open the Arduino IDE.
-3. Go to `Sketch` > `Include Library` > `Add .ZIP Library...`.
-4. Select the downloaded ZIP file and click `Open`. The Joystick library's examples will now appear under `File` > `Examples` > `Joystick`.
+# Hardware Instructions
+-------
+GPIO pins specific to Pi Pico, will change from board to board.
+If you need to change pins, modify SCL_PIN and SDA_PIN variables in main.py
 
-### Trill Arduino Library
+- Solder wire from GPIO 8 on Pi Pico to SCL pad on Trill Bar
+- Solder wire from GPIO 9 on Pi Pico to SCL pad on Trill Bar
+- Solder wire from 3v3 on Pi Pico to VCC pad on Trill Bar
+- Solder wire from GND on Pi Pico to GND pad on Trill bar
 
-1. Open the Arduino IDE.
-2. Go to `Sketch` > `Include Library` > `Manage Libraries...`.
-3. Search for "Trill" and install the Trill library by BelaPlatform.
+A Qwiic cable can also be used for one or both connections if your board supports it.
 
-Alternatively, you can download the library from [this link](https://github.com/BelaPlatform/Trill-Arduino) and install it using the same steps as for the Joystick library.
 
-## Hardware Example
+# Software Installation
+-------
+1.  Download MicroPython libraries listed in Software Requirements
+2.  Install mpremote, ensure it's in PATH to pick up environment var
+3.  Open a terminal
+4.  Copy main.py, joystick.py, trill libraries, and USB libraries (making sure to preserve file structure) to your board
+    - `mpremote cp main.py :main.py`
+    - `mpremote cp joystick.py :joystick.py`
+    - `mpremote mkdir usb\device`
+    - `mpremote cp usb.py :\usb\device\usb.py`
+    - `mpremote cp hid.py :\usb\device\hid.py`
+    - `mpremote cp trill.py :trill.py`
+    - `mpremote cp touch.py :touch.py`
+5.  Reset the board with `mpremote soft-reset`
+6.  (optional) open up gamepad configuration to check if it all worked
 
-### Example Setup
-
-- **Microcontroller**: SparkFun Qwiic Pro Micro - USB-C (ATmega32U4)
-- **Connection Cable**: SparkFun Qwiic Cable - 50mm
-- **Sensor**: Trill Bar
-- **Power and Programming**: USB-C cable
-
-### Optional Housing
-
-For a neat setup, you can 3D print a housing for the Trill Bar using this [Trill_Bar_Stand.stl](https://www.thingiverse.com/thing:5320767) from Thingiverse.
-
-### Connection Instructions
-
-1. Connect the Trill Bar to the SparkFun Qwiic Pro Micro using the SparkFun Qwiic Cable.
-2. Connect the SparkFun Qwiic Pro Micro to your computer using a USB-C cable.
-
-### Special Note for Using the Qwiic Pro Micro
-
-When setting up the SparkFun Qwiic Pro Micro in the Arduino IDE, follow these steps carefully to avoid common pitfalls:
-
-- **Board Add-Ons**: Install the Spark Fun board add-ons to Arduino IDE by following the instructions [here](https://learn.sparkfun.com/tutorials/installing-arduino-ide/board-add-ons-with-arduino-board-manager).
-- **Board Selection**: In the Arduino IDE, go to `Tools` > `Board` and select `SparkFun Pro Micro`.
-- **Processor Selection**: Go to `Tools` > `Processor` and select `ATmega32U4 (5V, 16 MHz)`.
-
-## Usage
-
-1. Connect the Trill Bar sensor to your Arduino according to the Trill documentation.
-2. Open the Arduino IDE and create a new sketch.
-3. Copy and paste the provided code into the sketch.
-4. Compile and upload the sketch to your Arduino.
-5. (Optionally) open a serial monitor to observe the debug messages.
-6. The joystick should now respond to touches on the Trill Bar.
+Serial monitor can be used to view logging.
