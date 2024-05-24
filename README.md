@@ -1,28 +1,23 @@
 # ??
--------
 This is a MicroPython port of [bamtna's joyslide project](https://github.com/bamtna/joyslide/tree/main) which utilizes a Trill Bar as a touch-sensitive input device that is mapped to the steering axis of a joystick.
 
 # Hardware:
--------
 - Microcontroller capable of running a machine.USBDevice compatible port of MicroPython (I used a Pi Pico w/rp2040 board)
 - Trill Bar sensor
 - USB Cable
 
 # Software:
--------
 - [MicroPython usb-device-hid hid.py library](https://github.com/micropython/micropython-lib/tree/master/micropython/usb/usb-device-hid/usb/device)
 - [MicroPython usb-device core.py library](https://github.com/micropython/micropython-lib/tree/master/micropython/usb/usb-device/usb/device)
 - [MicroPythonTrill trill.py and touch.py libraries](https://github.com/Heerkog/MicroPythonTrill)
 - [mpremote](https://pypi.org/project/mpremote/) (pip install mpremote)
 
 # Case:
-
 [Case with several configurations](https://www.thingiverse.com/thing:6630614) is available on Thingiverse.  Several trim pieces to aid in tactile feedback and a bottom for the case with recessed holes for anti slip rubber nubs are available too.
 
 [Bela's Trill Bar case](https://www.thingiverse.com/thing:5320767) is what I based my designs off of.
 
 # Hardware Instructions
--------
 GPIO pins specific to Pi Pico, will change from board to board.
 If you need to change pins, modify SCL_PIN and SDA_PIN variables in main.py
 
@@ -35,7 +30,6 @@ A Qwiic cable can also be used for one or both connections if your board support
 
 
 # Software Installation
--------
 1.  Download MicroPython libraries listed in Software Requirements
 2.  Install mpremote, ensure it's in PATH to pick up environment var
 3.  Open a terminal
